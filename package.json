@@ -1,0 +1,20 @@
+{
+  "name": "age",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite --host --open",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "sh deploy.sh"
+  },
+  "dependencies": {
+    "dayjs": "^1.10.7",
+    "vue": "^3.2.25"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.0.0",
+    "autoprefixer": "^10.4.2",
+    "sass": "^1.49.7",
+    "vite": "^2.7.2"
+  }
+}
