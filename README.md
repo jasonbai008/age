@@ -12,6 +12,3 @@
 3. yarn preview (预览生产环境)
 4. yarn build (构建)
 5. yarn deploy (构建&部署)
-
-## QR Code
-<img src="https://gitee.com/lubanseven/age/raw/master/qr.png" width="200">
