@@ -22,7 +22,7 @@ const rangeObj = reactive({
 });
 
 const rangeStr = computed(() => {
-  return `您已在地球上生活了${rangeObj.data.totalDays}天<br>${rangeObj.data.years}岁 ${rangeObj.data.months}月 ${rangeObj.data.days}天 `;
+  return `您已在地球上活了${rangeObj.data.totalDays}天<br>${rangeObj.data.years}岁 ${rangeObj.data.months}月 ${rangeObj.data.days}天 `;
 });
 
 const checkInput = (val) => {
@@ -59,6 +59,8 @@ const wow = () => {
   }
   isPlay = !isPlay;
 };
+
+const showName = () => alert("歌曲名：Blinded By The Night");
 </script>
 
 <template>
@@ -69,6 +71,7 @@ const wow = () => {
         width="200"
         height="200"
         @click="wow"
+        @dblclick="showName"
       />
       <h4>真实年龄计算器</h4>
       <div class="input">
@@ -96,6 +99,9 @@ const wow = () => {
   margin-top: 10%;
   justify-content: space-between;
   .top {
+    img:hover {
+      cursor: pointer;
+    }
     h4 {
       font-size: 20px;
       margin-top: 0;
