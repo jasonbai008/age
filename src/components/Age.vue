@@ -92,8 +92,8 @@ const wow = () => {
 .age-wrap {
   display: flex;
   flex-direction: column;
-  height: 83%;
-  margin-top: 12%;
+  height: 80%;
+  margin-top: 10%;
   justify-content: space-between;
   .top {
     h4 {
