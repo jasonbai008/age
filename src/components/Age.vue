@@ -68,7 +68,7 @@ const wow = () => {
         src="../assets/logo.gif"
         width="200"
         height="200"
-        @touchstart="wow"
+        @click="wow"
       />
       <h4>真实年龄计算器</h4>
       <div class="input">
