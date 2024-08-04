@@ -6,7 +6,7 @@ import duration from "dayjs/plugin/duration";
 dayjs.extend(duration);
 
 let audio = new Audio();
-audio.src = "https://lubanseven.gitee.io/age/mp3/blindedByTheNight.mp3";
+audio.src = "./mp3/blindedByTheNight.mp3";
 
 let isPlay = false;
 let reg = /^\d{4}\.\d{1,2}\.\d{1,2}$/;
@@ -17,11 +17,12 @@ const rangeObj = reactive({
     years: "",
     months: "",
     days: "",
+    totalDays: "",
   },
 });
 
 const rangeStr = computed(() => {
-  return `${rangeObj.data.years}岁 ${rangeObj.data.months}月 ${rangeObj.data.days}天 `;
+  return `您已在地球上生活了${rangeObj.data.totalDays}天<br>${rangeObj.data.years}岁 ${rangeObj.data.months}月 ${rangeObj.data.days}天 `;
 });
 
 const checkInput = (val) => {
@@ -39,7 +40,12 @@ const getAge = () => {
     // IOS只支持斜杠分割的日期格式
     let pre = dayjs(birthday.value.split(".").join("/"), "YYYY/MM/DD");
     let now = dayjs(dayjs().format("YYYY/MM/DD"), "YYYY/MM/DD");
-    rangeObj.data = dayjs.duration(now.diff(pre)).$d;
+    let total = now.diff(pre, "day");
+    // rangeObj.data = dayjs.duration(now.diff(pre)).$d;
+    rangeObj.data = Object.assign(
+      { totalDays: total.toLocaleString() },
+      dayjs.duration(now.diff(pre)).$d
+    );
     console.table(rangeObj.data);
     hasBirthday.value = true;
   }
@@ -58,13 +64,25 @@ const wow = () => {
 <template>
   <div class="age-wrap">
     <div class="top">
-      <img src="../assets/logo.gif" width="200" height="200" @touchstart="wow" />
+      <img
+        src="../assets/logo.gif"
+        width="200"
+        height="200"
+        @touchstart="wow"
+      />
       <h4>真实年龄计算器</h4>
       <div class="input">
-        <input type="text" v-model="birthday" @keyup.enter="getAge" placeholder="请输入出生日期,如:1989.02.14" />
+        <input
+          type="text"
+          v-model="birthday"
+          @keyup.enter="getAge"
+          placeholder="请输入出生日期,如:1989.02.14"
+        />
         <!-- <button @click="getAge">OK</button> -->
       </div>
-      <div class="output" v-if="hasBirthday">{{rangeStr}}</div>
+      <div class="output" v-if="hasBirthday">
+        <p v-html="rangeStr"></p>
+      </div>
     </div>
     <p class="bot">Developed by Jason Bai with LOVE</p>
   </div>
@@ -74,8 +92,8 @@ const wow = () => {
 .age-wrap {
   display: flex;
   flex-direction: column;
-  height: 80%;
-  margin-top: 10%;
+  height: 83%;
+  margin-top: 12%;
   justify-content: space-between;
   .top {
     h4 {
@@ -131,6 +149,9 @@ const wow = () => {
     .output {
       font-size: 20px;
       margin-top: 60px;
+      p {
+        line-height: 2;
+      }
     }
   }
   .bot {
